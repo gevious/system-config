@@ -1,0 +1,10 @@
+[Unit]
+Description=xremap to map keyboard to more sane keys
+
+[Service]
+Type=exec
+ExecStart=xremap %h/.config/xremap/config.yml --watch
+Restart=always
+
+[Install]
+WantedBy=default.target
