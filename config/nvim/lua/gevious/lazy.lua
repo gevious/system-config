@@ -20,6 +20,9 @@ require('lazy').setup({
     -- Undo tree for navigating undo history
     'mbbill/undotree',
 
+    -- Table mode
+    'dhruvasagar/vim-table-mode',
+
     -- Fuzzy finder
     {
         'nvim-telescope/telescope.nvim',
