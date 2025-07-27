@@ -1,0 +1,152 @@
+# Bare minimum config for a new system along with 'includes' for more options
+
+set $mod Shift+Ctrl
+set $modMeta Mod1
+
+focus_on_window_activation smart
+
+#set $menu rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
+#bindsym $mod+d exec $menu
+
+include ./general-keybindings.conf
+#include ./theme.conf
+include ./window-decorations.conf
+#include ./multimedia-keybindings.conf
+#include ./script-keybindings.conf
+#include ./rofi.conf
+#include ./app-details.conf
+#include ./autostart.conf
+
+## Keep workspaces 1-3 on the left monitor, 9-0 on the right
+## Home Set up
+#workspace $ws1 output DP-0
+#workspace $ws2 output DP-0
+#workspace $ws3 output DP-0
+#workspace $ws9 output DP-4
+#workspace $ws0 output DP-4
+# uncomment the next line, use arandr to setup displays and save the file as monitor:
+#exec --no-startup-id ~/.config/sway/scripts/display-setup
+#
+## Lock screen after delay (Sway only)
+##exec ~/.config/sway/scripts/idle
+
+
+#### Output configuration
+##
+## Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+##
+## Example configuration:
+##
+##   output HDMI-A-1 resolution 1920x1080 position 1920,0
+##
+## You can get the names of your outputs by running: swaymsg -t get_outputs
+#
+#### Idle configuration
+##
+## Example configuration:
+##
+## exec swayidle -w \
+##          timeout 300 'swaylock -f -c 000000' \
+##          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+##          before-sleep 'swaylock -f -c 000000'
+##
+## This will lock your screen after 300 seconds of inactivity, then turn off
+## your displays after another 300 seconds, and turn your screens back on when
+## resumed. It will also lock your screen before your computer goes to sleep.
+#
+#### Input configuration
+##
+## Example configuration:
+##
+##   input type:touchpad {
+##       dwt enabled
+##       tap enabled
+##       natural_scroll enabled
+##       middle_emulation enabled
+##   }
+##
+##   input type:keyboard {
+##       xkb_layout "eu"
+##   }
+##
+## You can also configure each device individually.
+## Read `man 5 sway-input` for more information about this section.
+#
+#### Key bindings
+##
+## Basics:
+##
+#    # Drag floating windows by holding down $mod and left mouse button.
+#    # Resize them with right mouse button + $mod.
+#    # Despite the name, also works for non-floating windows.
+#    # Change normal to inverse to use left mouse button for resizing and right
+#    # mouse button for dragging.
+#    floating_modifier $mod normal
+#
+#    # Exit sway (logs you out of your Wayland session)
+##
+## Workspaces:
+##
+#    # Note: workspaces can have any name you want, not just numbers.
+#    # We just use 1-10 as the default.
+##
+## Layout stuff:
+##
+#    # You can "split" the current object of your focus with
+#    # $mod+b or $mod+v, for horizontal and vertical splits
+#    # respectively.
+#    bindsym $mod+b split h
+#    bindsym $mod+v split v
+#
+#
+#    # Swap focus between the tiling area and the floating area
+#    bindsym $mod+space focus mode_toggle
+#
+#    # Move focus to the parent container
+#    bindsym $mod+a focus parent
+##
+## Scratchpad:
+##
+#    # Sway has a "scratchpad", which is a bag of holding for windows.
+#    # You can send windows there and get them back later.
+#
+#    # Move the currently focused window to the scratchpad
+#    bindsym $mod+Shift+minus move scratchpad
+#
+#    # Show the next scratchpad window or hide the focused scratchpad window.
+#    # If there are multiple scratchpad windows, this command cycles through them.
+#    bindsym $mod+minus scratchpad show
+##
+## Utilities:
+##
+#    # Special keys to adjust volume via PulseAudio
+#    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+#    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+#    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+#    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+#    # Special keys to adjust brightness via brightnessctl
+#    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+#    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+#    # Special key to take a screenshot with grim
+#    bindsym Print exec grim
+#
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+#
+#include /etc/sway/config.d/*
