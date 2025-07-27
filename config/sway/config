@@ -11,7 +11,7 @@ focus_on_window_activation smart
 include ./general-keybindings.conf
 #include ./theme.conf
 include ./window-decorations.conf
-#include ./multimedia-keybindings.conf
+include ./multimedia-keybindings.conf
 #include ./script-keybindings.conf
 #include ./rofi.conf
 #include ./app-details.conf
