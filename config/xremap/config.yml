@@ -1,4 +1,13 @@
 modmap:
+  # Remap CapsLock to Left Control key
   - name: Global
     remap:
       CapsLock: Ctrl_L
+keymap:
+  # Remap Alt e/s/d/f to arrow keys
+  - name: Arrow Keys
+    remap:
+      Alt-e: up
+      Alt-d: down
+      Alt-s: left
+      Alt-f: right
