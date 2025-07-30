@@ -1,20 +1,40 @@
 #!/usr/bin/env bash
-# Based on ThePrimeagen's scripts
+# Inspired by ThePrimeagen's scripts
 
-# search these directories
-DIRECTORIES="${HOME}/w ${HOME}/w/groundskeeper"
+# Shows all top-level directories in BASE_DIR, except DIRECTORIES
+# all DIRECTORIES show up along with 1 additional child directory
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(find ${DIRECTORIES} -mindepth 1 -maxdepth 1 -type d | fzf)
-fi
+BASE_DIR="${HOME}/w"
+CATEGORIES="groundskeeper vecna"
 
-if [[ -z $selected ]]; then
+entries=$(
+  for dir in "$BASE_DIR"/*; do
+    [ -d "$dir" ] || continue
+    name="${dir#$BASE_DIR/}"
+
+    if [[ " $CATEGORIES " == *" $name "* ]]; then
+      # Print subdirectories of the matching directory
+      find "$dir" -mindepth 1 -maxdepth 1 -type d | while read -r sub; do
+        echo "${sub#$BASE_DIR/}"
+      done
+    else
+      # Print the directory itself
+      echo "$name"
+    fi
+  done
+)
+
+selected_name=$(while IFS= read -r entry; do
+  echo "$entry"
+done <<< "$entries" | fzf) 
+
+if [[ -z $selected_name ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+selected="$BASE_DIR/$selected_name"
+echo "Selected: $selected"
+echo "Selectedname: $selected_name"
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
