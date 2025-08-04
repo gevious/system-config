@@ -1,0 +1,6 @@
+#!/bin/bash
+output=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name')
+filename=~/screenshot_$(date +%F_%H-%M-%S).png
+grim -o "$output" "$filename"
+notify-send "Screenshot saved to $filename"
+

@@ -3,17 +3,9 @@
 PICTURE=/tmp/i3lock.png
 BLUR="5x4"
 
-if [ "$WAYLAND_DISPLAY" ]; then
-    # screenshot only 1 monitor
-    #grim $PICTURE
-    grim -o DP-4 $PICTURE
-    convert $PICTURE -blur $BLUR $PICTURE
-    swaylock -f -i $PICTURE -s stretch
-else
-    scrot $PICTURE
-    convert $PICTURE -blur $BLUR $PICTURE
-    i3lock -i $PICTURE
-fi
-rm $PICTURE
-
+# screenshot only 1 monitor
+grim $PICTURE
+#grim -o DP-4 $PICTURE
+convert $PICTURE -blur $BLUR $PICTURE
+swaylock -f -i $PICTURE -s stretch
 rm $PICTURE

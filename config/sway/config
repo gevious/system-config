@@ -12,7 +12,7 @@ include ./general-keybindings.conf
 #include ./theme.conf
 include ./window-decorations.conf
 include ./multimedia-keybindings.conf
-#include ./script-keybindings.conf
+include ./script-keybindings.conf
 #include ./rofi.conf
 #include ./app-details.conf
 #include ./autostart.conf
