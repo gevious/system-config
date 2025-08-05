@@ -4,17 +4,13 @@ set $mod Shift+Ctrl
 set $modMeta Mod1
 
 focus_on_window_activation smart
+# load the toolbar
+exec waybar 
 
-#set $menu rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
-#bindsym $mod+d exec $menu
-
-include ./general-keybindings.conf
-#include ./theme.conf
+include ./keybindings.conf
 include ./window-decorations.conf
-include ./multimedia-keybindings.conf
-include ./script-keybindings.conf
-#include ./rofi.conf
-#include ./app-details.conf
+include ./app-placement.conf
+include ./theme.conf
 #include ./autostart.conf
 
 ## Keep workspaces 1-3 on the left monitor, 9-0 on the right
@@ -130,23 +126,3 @@ include ./script-keybindings.conf
 #    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 #    # Special key to take a screenshot with grim
 #    bindsym Print exec grim
-#
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
-#
-#include /etc/sway/config.d/*
