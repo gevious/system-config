@@ -16,8 +16,8 @@ lspconfig.ts_ls.setup {
 }
 
 -- key bindings for LSP completion
-local cmp = require ('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp = require('cmp')
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
@@ -29,24 +29,33 @@ cmp.setup({
 })
 
 lsp.on_attach(function(_, bufnr)
-	lsp.default_keymaps({buffer = bufnr})
-	local opts = {buffer = bufnr, remap = false}
+    lsp.default_keymaps({ buffer = bufnr })
+    local opts = { buffer = bufnr, remap = false }
 
-	vim.keymap.set("n", "<C-l>gd", function() vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "<C-l>?", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<C-l>ss", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<C-l>d", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "<C-l>n", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "<C-l>p", function() vim.diagnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<C-l>ca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<C-l>rr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<C-l>rn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { desc = "Show implementations" })
+    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set("n", "<C-[>?", function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set("n", "<C-[>s", function() vim.lsp.buf.workspace_symbol() end, opts)
+    vim.keymap.set("n", "<C-[><C-[>", function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ forward = true, count = 1 }) end, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ forward = false, count = 1 }) end, opts)
+    vim.keymap.set("n", "]e",
+        function() vim.diagnostic.jump({ forward = true, count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+        { desc = "Next error" })
+    vim.keymap.set("n", "[e",
+        function() vim.diagnostic.jump({ forward = false, count = 1, severity = vim.diagnostic.severity.ERROR }) end,
+        { desc = "Previous error" })
+    vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "<C-[>f", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "<C-[>r", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("n", "<C-[>h", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "<C-]><C-]>", function()
+        vim.diagnostic.setqflist()
+        vim.cmd("copen")
+    end, { desc = "List diagnostics" })
 end)
 
 -- Remove the global 'vim' warning in Nvim lua configs
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
-
-
