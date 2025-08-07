@@ -36,3 +36,9 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
+
+-- Colors
+vim.api.nvim_set_hl(0, 'LineNr', { fg = '#5fafff' })
+
+-- Folding
+vim.opt.foldmethod = "indent"
