@@ -59,7 +59,7 @@ require('lazy').setup({
     -- LSP SETUP
     -- Assumes existance of LSP clients like rust-analyzer
     {'neovim/nvim-lspconfig'},
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
+    {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
 
     -- LSP Autocompletion
     {'hrsh7th/nvim-cmp'},
