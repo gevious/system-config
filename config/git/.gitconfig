@@ -1,12 +1,12 @@
 [user]
 	email = me@gevious.com
 	name = Gevious
+[init]
+    defaultBranch = main
 [column]
     ui = auto
 [branch]
     sort = -committerdate
-[init]
-    defaultBranch = main
 [diff]
     algorithm = histogram
     colorMoved = plain
@@ -24,3 +24,5 @@
     autoSquash = true
     autoStash = true
     updateRefs = true
+[pull]
+	rebase = true

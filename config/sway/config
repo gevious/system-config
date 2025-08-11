@@ -1,11 +1,26 @@
 # Bare minimum config for a new system along with 'includes' for more options
 
+# Variables
 set $mod Shift+Ctrl
 set $modMeta Mod1
+# Direction keys
+set $left h
+set $down j
+set $up k
+set $right l
 
-focus_on_window_activation smart
-# load the toolbar
-exec waybar 
+# Workspaces
+set $ws0 "0"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+
+# Proper loading of xdg-desktop-portal
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+# Kill any existing waybar and start fresh
+exec_always pkill waybar; waybar
 
 include ./keybindings.conf
 include ./window-decorations.conf
@@ -13,9 +28,26 @@ include ./app-placement.conf
 include ./theme.conf
 #include ./autostart.conf
 
+##
+## Monitor positions for the office
+## DP-5 | DP-4 | DP- 
+##
+# far left monitor
+output DP-5 pos 0 0 res 1920x1080
+workspace $ws9 output DP-5
+# middle monitor
+output DP-4 pos 1920 0 res 1920x1080
+workspace $ws1 output DP-4
+workspace $ws2 output DP-4
+workspace $ws3 output DP-4
+# laptop monitor far right
+output eDP-1 pos 3840 0 res 1920x1200
+workspace $ws0 output eDP-1
+
+focus_on_window_activation smart
+
 ## Keep workspaces 1-3 on the left monitor, 9-0 on the right
 ## Home Set up
-#workspace $ws1 output DP-0
 #workspace $ws2 output DP-0
 #workspace $ws3 output DP-0
 #workspace $ws9 output DP-4
@@ -23,56 +55,6 @@ include ./theme.conf
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
 #exec --no-startup-id ~/.config/sway/scripts/display-setup
 #
-## Lock screen after delay (Sway only)
-##exec ~/.config/sway/scripts/idle
-
-
-#### Output configuration
-##
-## Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-##
-## Example configuration:
-##
-##   output HDMI-A-1 resolution 1920x1080 position 1920,0
-##
-## You can get the names of your outputs by running: swaymsg -t get_outputs
-#
-#### Idle configuration
-##
-## Example configuration:
-##
-## exec swayidle -w \
-##          timeout 300 'swaylock -f -c 000000' \
-##          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-##          before-sleep 'swaylock -f -c 000000'
-##
-## This will lock your screen after 300 seconds of inactivity, then turn off
-## your displays after another 300 seconds, and turn your screens back on when
-## resumed. It will also lock your screen before your computer goes to sleep.
-#
-#### Input configuration
-##
-## Example configuration:
-##
-##   input type:touchpad {
-##       dwt enabled
-##       tap enabled
-##       natural_scroll enabled
-##       middle_emulation enabled
-##   }
-##
-##   input type:keyboard {
-##       xkb_layout "eu"
-##   }
-##
-## You can also configure each device individually.
-## Read `man 5 sway-input` for more information about this section.
-#
-#### Key bindings
-##
-## Basics:
-##
 #    # Drag floating windows by holding down $mod and left mouse button.
 #    # Resize them with right mouse button + $mod.
 #    # Despite the name, also works for non-floating windows.
@@ -113,16 +95,3 @@ include ./theme.conf
 #    # Show the next scratchpad window or hide the focused scratchpad window.
 #    # If there are multiple scratchpad windows, this command cycles through them.
 #    bindsym $mod+minus scratchpad show
-##
-## Utilities:
-##
-#    # Special keys to adjust volume via PulseAudio
-#    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-#    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-#    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-#    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-#    # Special keys to adjust brightness via brightnessctl
-#    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-#    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-#    # Special key to take a screenshot with grim
-#    bindsym Print exec grim
