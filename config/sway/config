@@ -17,8 +17,8 @@ set $ws3 "3"
 set $ws4 "4"
 
 # Proper loading of xdg-desktop-portal
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+#exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+#exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 # Kill any existing waybar and start fresh
 exec_always pkill waybar; waybar
 
@@ -32,14 +32,22 @@ include ./theme.conf
 ## Monitor positions for the office
 ## DP-5 | DP-4 | DP- 
 ##
-# far left monitor
+# far left monitor (office)
 output DP-5 pos 0 0 res 1920x1080
 workspace $ws9 output DP-5
-# middle monitor
+# far left monitor (home)
+output DP-3 pos 0 0 res 1920x1080
+workspace $ws9 output DP-3
+# middle monitor (office)
 output DP-4 pos 1920 0 res 1920x1080
 workspace $ws1 output DP-4
 workspace $ws2 output DP-4
 workspace $ws3 output DP-4
+# right monitor (home)
+output DP-1 pos 1920 0 res 1920x1080
+workspace $ws1 output DP-1
+workspace $ws2 output DP-1
+workspace $ws3 output DP-1
 # laptop monitor far right
 output eDP-1 pos 3840 0 res 1920x1200
 workspace $ws0 output eDP-1
