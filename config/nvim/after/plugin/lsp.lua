@@ -1,61 +1,56 @@
-local lsp = require('lsp-zero')
+--
+-- General LSP settings
+--
 
-lsp.preset("recommended")
+-- Use Neovim's built-in diagnostics for LSP warnings
+---- LSP Diagnostics Options Setup
+--local sign = function(opts)
+--    vim.fn.sign_define(opts.name, {
+--        texthl = opts.name,
+--        text = opts.text,
+--        numhl = ''
+--    })
+--end
+--
+--sign({ name = 'DiagnosticSignError', text = '' })
+--sign({ name = 'DiagnosticSignWarn', text = '' })
+--sign({ name = 'DiagnosticSignHint', text = '' })
+--sign({ name = 'DiagnosticSignInfo', text = '' })
 
-local lspconfig = require('lspconfig')
-lspconfig.rust_analyzer.setup {
-    settings = {
-        ['rust_analyzer'] = {}
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = true,
+    severity_sort = true,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
     },
-}
-
-lspconfig.ts_ls.setup {
-    settings = {
-        ['typescript-language-server'] = {}
-    },
-}
-
--- key bindings for LSP completion
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-
-cmp.setup({
-    mapping = cmp.mapping.preset.insert({
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    })
 })
 
-lsp.on_attach(function(_, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
-    local opts = { buffer = bufnr, remap = false }
+-- Show all diagnostics in telescope
+local telescope = require("telescope.builtin")
 
-    vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { desc = "Show implementations" })
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "<C-[>?", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<C-[>s", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<C-[><C-[>", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ forward = true, count = 1 }) end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ forward = false, count = 1 }) end, opts)
-    vim.keymap.set("n", "]e",
-        function() vim.diagnostic.jump({ forward = true, count = 1, severity = vim.diagnostic.severity.ERROR }) end,
-        { desc = "Next error" })
-    vim.keymap.set("n", "[e",
-        function() vim.diagnostic.jump({ forward = false, count = 1, severity = vim.diagnostic.severity.ERROR }) end,
-        { desc = "Previous error" })
-    vim.keymap.set("n", "ga", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<C-[>f", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "<C-[>r", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("n", "<C-[>h", function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set("n", "<C-]><C-]>", function()
-        vim.diagnostic.setqflist()
-        vim.cmd("copen")
-    end, { desc = "List diagnostics" })
-end)
+-- Show diagnostics for project
+vim.keymap.set('n', '<leader>xx', function()
+    telescope.diagnostics()
+end, { desc = "List all diagnostics in Telescope" })
 
--- Remove the global 'vim' warning in Nvim lua configs
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- Show diagnostics for current bffer
+vim.keymap.set('n', '<leader>xl', function()
+    telescope.diagnostics({ bufnr = 0 })
+end, { desc = "List buffer diagnostics in Telescope" })
 
-lsp.setup()
+
+-- open dialog only when asked
+vim.keymap.set('n', '<leader>e', function()
+    vim.diagnostic.open_float(nil, { focus = true })
+end, { desc = "Show diagnostics in floating window" })
+
+--vim.cmd([[
+--set signcolumn=yes
+--autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+--]])

@@ -2,18 +2,41 @@ local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 -- Install Lazy package manager if not installed
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  })
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+
+    -- mason for managing external dependencies (esp LSP)
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+
+    -- LSP tools
+    'neovim/nvim-lspconfig',
+    'simrat39/rust-tools.nvim',
+
+    -- LSP Autocompletion
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/nvim-cmp',
+--    'hrsh7th/nvim-vsnip',
+
+    -- Code formatting: Highlight, editing, navigating
+    'nvim-treesitter/nvim-treesitter',
+
     -- Git source control tools
     'tpope/vim-fugitive',
 
@@ -23,7 +46,7 @@ require('lazy').setup({
     -- Table mode
     'dhruvasagar/vim-table-mode',
 
-    -- Fuzzy finder
+    -- Telescope (Fuzzy finder)
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
@@ -39,77 +62,61 @@ require('lazy').setup({
         priority = 1000
     },
 
-    -- Highlight, edit, and navigate code
-    {
-        'nvim-treesitter/nvim-treesitter',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
-        },
-        build = ':TSUpdate',
-    },
 
     -- Harpoon for fast switching between files
     'nvim-lua/plenary.nvim',
     {
-	    'ThePrimeagen/harpoon',
-	    branch = 'harpoon2',
-	    requires = { {'nvim-lua/plenary.nvim'} }
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+        requires = { { 'nvim-lua/plenary.nvim' } }
     },
 
     -- LSP SETUP
     -- Assumes existance of LSP clients like rust-analyzer
-    {'neovim/nvim-lspconfig'},
-    {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
-
-    -- LSP Autocompletion
-    {'hrsh7th/nvim-cmp'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/cmp-buffer'},
-    {'hrsh7th/cmp-path'},
-    {'hrsh7th/cmp-nvim-lua'},
+    --    {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
 
     -- LSP Snippets
-    {'L3MON4D3/LuaSnip'},
-    {'rafamadriz/friendly-snippets'},
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
 
     -- fuzzy finder
-    {'junegunn/fzf'},
+    { 'junegunn/fzf' },
 
 
     -- Java LSP
-    {
-      'nvim-java/nvim-java',
-      dependencies = {
-        'nvim-java/lua-async-await',
-        'nvim-java/nvim-java-refactor',
-        'nvim-java/nvim-java-core',
-        'nvim-java/nvim-java-test',
-        'nvim-java/nvim-java-dap',
-        'MunifTanjim/nui.nvim',
-        'neovim/nvim-lspconfig',
-        'mfussenegger/nvim-dap',
-        {
-          'williamboman/mason.nvim',
-          opts = {
-            registries = {
-              'github:nvim-java/mason-registry',
-              'github:mason-org/mason-registry',
-            },
-          },
-        }
-      },
-    },
+    --    {
+    --      'nvim-java/nvim-java',
+    --      dependencies = {
+    --        'nvim-java/lua-async-await',
+    --        'nvim-java/nvim-java-refactor',
+    --        'nvim-java/nvim-java-core',
+    --        'nvim-java/nvim-java-test',
+    --        'nvim-java/nvim-java-dap',
+    --        'MunifTanjim/nui.nvim',
+    --        'neovim/nvim-lspconfig',
+    --        'mfussenegger/nvim-dap',
+    --        {
+    --          'williamboman/mason.nvim',
+    --          opts = {
+    --            registries = {
+    --              'github:nvim-java/mason-registry',
+    --              'github:mason-org/mason-registry',
+    --            },
+    --          },
+    --        }
+    --      },
+    --    },
 
     -- git worktrees plugin
-    {'ThePrimeagen/git-worktree.nvim'},
+    { 'ThePrimeagen/git-worktree.nvim' },
 
---    -- plantuml previewer
---    {'weirongxu/plantuml-previewer.vim',
---        dependencies = {
---            'tyru/open-browser.vim',
---            'aklt/plantuml-syntax'
---        },
---    },
+    --    -- plantuml previewer
+    --    {'weirongxu/plantuml-previewer.vim',
+    --        dependencies = {
+    --            'tyru/open-browser.vim',
+    --            'aklt/plantuml-syntax'
+    --        },
+    --    },
 
     -- asciidoctor
     {

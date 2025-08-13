@@ -31,6 +31,7 @@ include ./theme.conf
 #include ./autostart.conf
 
 focus_on_window_activation smart
+focus_follows_mouse no
 
 #exec --no-startup-id ~/.config/sway/scripts/display-setup
 
