@@ -1,19 +1,22 @@
 require("lspconfig").rust_analyzer.setup({
-  settings = {
-    ["rust-analyzer"] = {
-      completion = {
-        autoimport = {
-          enable = true
+    cmd = { "rust-analyzer" }, -- ensures these are installed locally
+    settings = {
+        ["rust-analyzer"] = {
+            cargo = { allFeatures = true },
+            procMacro = { enable = true },
+            completion = {
+                autoimport = {
+                    enable = true
+                }
+            },
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
         }
-      },
-      imports = {
-        granularity = {
-          group = "module",
-        },
-        prefix = "self",
-      },
     }
-  }
 })
 
 

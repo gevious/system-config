@@ -16,9 +16,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-    -- mason for managing external dependencies (esp LSP)
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    --
+    -- LSP SETUP
+    -- Assumes existance of LSP clients like rust-analyzer
 
     -- LSP tools
     'neovim/nvim-lspconfig',
@@ -32,10 +32,15 @@ require('lazy').setup({
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-vsnip',
     'hrsh7th/nvim-cmp',
---    'hrsh7th/nvim-vsnip',
+    'hrsh7th/vim-vsnip',
 
     -- Code formatting: Highlight, editing, navigating
     'nvim-treesitter/nvim-treesitter',
+
+
+    -- LSP Snippets
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
 
     -- Git source control tools
     'tpope/vim-fugitive',
@@ -62,7 +67,6 @@ require('lazy').setup({
         priority = 1000
     },
 
-
     -- Harpoon for fast switching between files
     'nvim-lua/plenary.nvim',
     {
@@ -70,14 +74,6 @@ require('lazy').setup({
         branch = 'harpoon2',
         requires = { { 'nvim-lua/plenary.nvim' } }
     },
-
-    -- LSP SETUP
-    -- Assumes existance of LSP clients like rust-analyzer
-    --    {'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'},
-
-    -- LSP Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
 
     -- fuzzy finder
     { 'junegunn/fzf' },
@@ -95,15 +91,6 @@ require('lazy').setup({
     --        'MunifTanjim/nui.nvim',
     --        'neovim/nvim-lspconfig',
     --        'mfussenegger/nvim-dap',
-    --        {
-    --          'williamboman/mason.nvim',
-    --          opts = {
-    --            registries = {
-    --              'github:nvim-java/mason-registry',
-    --              'github:mason-org/mason-registry',
-    --            },
-    --          },
-    --        }
     --      },
     --    },
 
