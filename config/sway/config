@@ -18,17 +18,12 @@ set $ws4 "4"
 set $ws8 "8"
 set $ws9 "9"
 
-# Proper loading of xdg-desktop-portal
-#exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-#exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
-# Kill any existing waybar and start fresh
-exec_always pkill waybar; waybar
-
 include ./keybindings.conf
 include ./window-decorations.conf
 include ./app-placement.conf
 include ./theme.conf
-#include ./autostart.conf
+include ./display-setup.conf
+include ./autostart.conf
 
 focus_on_window_activation smart
 focus_follows_mouse no
