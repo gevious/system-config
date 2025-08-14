@@ -22,16 +22,16 @@ include ./keybindings.conf
 include ./window-decorations.conf
 include ./app-placement.conf
 include ./theme.conf
-include ./display-setup.conf
 include ./autostart.conf
 
 focus_on_window_activation smart
 focus_follows_mouse no
 
-#exec --no-startup-id ~/.config/sway/scripts/display-setup
-
-#    bindsym $mod+b split h
-#    bindsym $mod+v split v
-#
-#    # Move focus to the parent container
-#    bindsym $mod+a focus parent
+# Configure display and workspaces based on where I am
+# Push workspace mappings to env, so they can be used in the  'monitor-setup' script
+# check  /etc/udev/rules.d/99-sway-monitor-hotplug.rules
+exec_always env \
+	LEFT_WS1=$ws2 LEFT_WS2=$ws3 \
+	RIGHT_WS1=$ws9 LEFT_WS2=$ws0 \
+	LAPTOP_WS=$ws4 \
+	/home/gevious/.config/sway/scripts/monitor-setup

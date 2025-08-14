@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Get outputs in the format: "eDP-1: Sharp Corporation", "DP-1: Dell Inc.", etc.
+outputs=$(swaymsg -t get_outputs | jq -r '.[] | select(.make != null) | "\(.name): \(.make)"' | grep .)
+
+#echo "$outputs"
+# Work laptop with monitors
+if echo "$outputs" | grep -q '^eDP-1: Sharp Corporation$' \
+     && echo "$outputs" | grep -q '^DP-6:' \
+     && echo "$outputs" | grep -q '^DP-7:'; then
+    echo "Work laptop with monitors"
+
+    # Left Display
+    swaymsg output DP-7 resolution 1920x1080 position 0 0 enable
+    swaymsg workspace "$LEFT_WS1" output DP-7
+    swaymsg workspace "$LEFT_WS2" output DP-7
+
+    # Right Display
+    swaymsg output DP-6 resolution 1920x1080 position 1920 0 enable
+    swaymsg workspace "$RIGHT_WS1" output DP-6
+    swaymsg workspace "$RIGHT_WS2" output DP-6
+
+    # Laptop
+    swaymsg output eDP-1 disable
+    #swaymsg output eDP-1 resolution 1920x1200 position 3840 0
+    #swaymsg workspace "$LAPTOP_WS" output eDP-1
+
+
+# Home office set up
+elif echo "$outputs" | grep -q '^DP-1:' \
+    && echo "$outputs" | grep -q '^DP-3:'; then
+    echo "Home office"
+
+    # Left Display
+    swaymsg output DP-3 resolution 1920x1080 position 0 0
+    swaymsg workspace "$LEFT_WS1" output DP-3
+    swaymsg workspace "$LEFT_WS2" output DP-3
+
+    # Right Display
+    swaymsg output DP-1 resolution 1920x1080 position 1920 0
+    swaymsg workspace "$RIGHT_WS1" output DP-1
+    swaymsg workspace "$RIGHT_WS2" output DP-1
+
+else
+    echo "Laptop w/o monitors"
+    swaymsg output eDP-1 resolution 1920x1200 position 0 0 enable
+fi
+
