@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Find the correct keyboard event device by name
+# This is used to bind xremap to an explicit event, and works across reboots and across machines
+
+DEVICE=$(grep -B5 -A5 -i "AT Translated Set 2 keyboard" /proc/bus/input/devices \
+         | grep -o "event[0-9]*" | head -n1)
+
+# Run xremap on that device
+exec /usr/bin/xremap --watch --device /dev/input/$DEVICE ~/.config/xremap/config.yml
+

@@ -3,7 +3,7 @@ Description=xremap to map keyboard to more sane keys
 
 [Service]
 Type=exec
-ExecStart=xremap %h/.config/xremap/config.yml --watch
+ExecStart=%h/.config/gevious-scripts/find-keyboard
 Restart=always
 
 [Install]
