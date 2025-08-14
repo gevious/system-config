@@ -6,19 +6,19 @@ outputs=$(swaymsg -t get_outputs | jq -r '.[] | select(.make != null) | "\(.name
 #echo "$outputs"
 # Work laptop with monitors
 if echo "$outputs" | grep -q '^eDP-1: Sharp Corporation$' \
-     && echo "$outputs" | grep -q '^DP-6:' \
-     && echo "$outputs" | grep -q '^DP-7:'; then
+     && echo "$outputs" | grep -q '^DP-5:' \
+     && echo "$outputs" | grep -q '^DP-4:'; then
     echo "Work laptop with monitors"
 
     # Left Display
-    swaymsg output DP-7 resolution 1920x1080 position 0 0 enable
-    swaymsg workspace "$LEFT_WS1" output DP-7
-    swaymsg workspace "$LEFT_WS2" output DP-7
+    swaymsg output DP-5 resolution 1920x1080 position 0 0 enable
+    swaymsg workspace "$LEFT_WS1" output DP-5
+    swaymsg workspace "$LEFT_WS2" output DP-5
 
     # Right Display
-    swaymsg output DP-6 resolution 1920x1080 position 1920 0 enable
-    swaymsg workspace "$RIGHT_WS1" output DP-6
-    swaymsg workspace "$RIGHT_WS2" output DP-6
+    swaymsg output DP-4 resolution 1920x1080 position 1920 0 enable
+    swaymsg workspace "$RIGHT_WS1" output DP-4
+    swaymsg workspace "$RIGHT_WS2" output DP-4
 
     # Laptop
     swaymsg output eDP-1 disable
