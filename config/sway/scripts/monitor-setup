@@ -1,48 +1,64 @@
 #!/usr/bin/env bash
 
+
+# model and Serial numbers:
+VECNA_MODEL="DELL P2419H"
+VECNA_LEFT="CPBQFZ2"
+VECNA_RIGHT="9K9QFZ2"
+
+HOME_MODEL="TBD"
+HOME_LEFT="TBD"
+HOME_RIGHT="TBD"
+
+# Home model: TBD
+# Home Left monitor: TBD
+# Home Right monitor: TBD
+
+
 # Get outputs in the format: "eDP-1: Sharp Corporation", "DP-1: Dell Inc.", etc.
-outputs=$(swaymsg -t get_outputs | jq -r '.[] | select(.make != null) | "\(.name): \(.make)"' | grep .)
+outputs_json=$(swaymsg -t get_outputs)
+echo "$outputs"
 
-#echo "$outputs"
-# Work laptop with monitors
-if echo "$outputs" | grep -q '^eDP-1: Sharp Corporation$' \
-     && echo "$outputs" | grep -q '^DP-5:' \
-     && echo "$outputs" | grep -q '^DP-4:'; then
-    echo "Work laptop with monitors"
+has_external_monitors() {
+    local model=$1
+    if echo "$outputs_json" | jq -e --arg model "$VECNA_MODEL" \
+            '.[] | select(.active == true and .model == $model)'; then
+        return 0 #true
+    else
+        return 1 #false
+    fi
+}
 
-    # Left Display
-    swaymsg output DP-5 resolution 1920x1080 position 0 0 enable
-    swaymsg workspace "$LEFT_WS1" output DP-5
-    swaymsg workspace "$LEFT_WS2" output DP-5
+position_monitors() {
+    local left_monitor="$1"
+    local right_monitor="$2"
 
-    # Right Display
-    swaymsg output DP-4 resolution 1920x1080 position 1920 0 enable
-    swaymsg workspace "$RIGHT_WS1" output DP-4
-    swaymsg workspace "$RIGHT_WS2" output DP-4
-
-    # Laptop
     swaymsg output eDP-1 disable
-    #swaymsg output eDP-1 resolution 1920x1200 position 3840 0
-    #swaymsg workspace "$LAPTOP_WS" output eDP-1
 
+    swaymsg output "$left_monitor" resolution 1920x1080 position 0 0 enable
+    swaymsg workspace "$LEFT_WS1" output "$left_monitor" 
+    swaymsg workspace "$LEFT_WS2" output "$left_monitor" 
 
-# Home office set up
-elif echo "$outputs" | grep -q '^DP-1:' \
-    && echo "$outputs" | grep -q '^DP-3:'; then
-    echo "Home office"
+    swaymsg output "$right_monitor" resolution 1920x1080 position 1920 0 enable
+    swaymsg workspace "$RIGHT_WS1" output "$right_monitor"
+    swaymsg workspace "$RIGHT_WS2" output "$right_monitor"
+}
 
-    # Left Display
-    swaymsg output DP-3 resolution 1920x1080 position 0 0
-    swaymsg workspace "$LEFT_WS1" output DP-3
-    swaymsg workspace "$LEFT_WS2" output DP-3
-
-    # Right Display
-    swaymsg output DP-1 resolution 1920x1080 position 1920 0
-    swaymsg workspace "$RIGHT_WS1" output DP-1
-    swaymsg workspace "$RIGHT_WS2" output DP-1
-
+if has_external_monitors $VECNA_MODEL; then
+    echo "Vecna Office monitors detected"
+    lm=$(echo "$outputs_json" | jq -r --arg serial "$VECNA_LEFT" \
+            '.[] | select(.serial == $serial) | .name')
+    rm=$(echo "$outputs_json" | jq -r --arg serial "$VECNA_RIGHT" \
+            '.[] | select(.serial == $serial) | .name')
+    position_monitors "$lm" "$rm"
+elif has_external_monitors $HOME_MODEL; then
+    echo "Home Office monitors detected"
+    lm=$(echo "$outputs_json" | jq -r --arg serial "$HOME_LEFT" \
+            '.[] | select(.serial == $serial) | .name')
+    rm=$(echo "$outputs_json" | jq -r --arg serial "$HOME_RIGHT" \
+            '.[] | select(.serial == $serial) | .name')
+    position_monitors "$lm" "$rm"
 else
-    echo "Laptop w/o monitors"
-    swaymsg output eDP-1 resolution 1920x1200 position 0 0 enable
+    echo "No external monitors"
+    swaymsg output eDP-1 enable
 fi
-
