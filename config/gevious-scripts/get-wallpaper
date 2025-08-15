@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# === CONFIG ===
+ACCESS_KEY="dkJPXALMNyvjKfCqM8dQcHttYeqhKSH5TgQlssTThXU"   # Unsplash API key
+QUERY="robots"              # or "sailboat", "nature", etc.
+DIR="$HOME/.cache/wallpapers"
+IMG="$DIR/wallpaper.jpg"
+
+mkdir -p "$DIR"
+
+# === FETCH RANDOM ROBOTS IMAGE ===
+IMG_URL=$(curl -s \
+  -H "Authorization: Client-ID $ACCESS_KEY" \
+  "https://api.unsplash.com/photos/random?query=$QUERY&orientation=landscape" \
+  | jq -r '.urls.full + "&w=1280&h=1080&fit=crop&fm=jpg"')
+
+if [[ -z "$IMG_URL" || "$IMG_URL" == "null" ]]; then
+    echo "Failed to get image URL from Unsplash"
+    exit 1
+fi
+
+# === DOWNLOAD TO TEMP FILE ===
+if ! curl -s -L -o "$IMG" "$IMG_URL"; then
+    echo "Failed to download image from $IMG_URL"
+    exit 1
+fi
+
+pkill swaybg
+swaybg -i "$IMG" -m fill &

@@ -1,0 +1,5 @@
+[Unit]
+Description=Fetch Unsplash robots wallpaper and set in Sway
+
+[Service]
+ExecStart=%h/.config/gevious-scripts/get-wallpaper
