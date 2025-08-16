@@ -15,6 +15,7 @@ cef_user_data
 configstore
 dconf
 discord
+default.target.wants
 evolution
 glib-2.0
 gnome-initial-setup-done
