@@ -31,17 +31,18 @@ rt.setup({
     },
     server = {
         on_attach = function(_, bufnr)
-            local opts = { buffer = bufnr }
+            local telescope_builtin = require('telescope.builtin')
+            local opts = { noremap=true, silent=true, buffer=bufnr}
             -- Hover actions
-            vim.keymap.set("n", "<C-tab>", rt.hover_actions.hover_actions, opts)
-            -- Code action groups
-            vim.keymap.set("n", "<C-[>a", rt.code_action_group.code_action_group, opts)
-            vim.keymap.set("n", "<C-[>f", vim.lsp.buf.references, opts)
-            vim.keymap.set("n", "<C-[>r", vim.lsp.buf.rename, opts)
-            vim.keymap.set("n", "<C-[>h", vim.lsp.buf.signature_help, opts)
-            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-            vim.keymap.set("n", "ga", vim.lsp.buf.code_action, opts)
-            vim.keymap.set('n', 'gi', require('telescope.builtin').lsp_implementations, { desc = "Show implementations" })
+            vim.keymap.set("n", "<C-[>a", rt.hover_actions.hover_actions, opts)
+            vim.keymap.set("n", "<C-[>c", rt.code_action_group.code_action_group, opts)
+            vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts)
+
+            vim.keymap.set('n', 'ga', vim.lsp.buf.code_action, opts)
+            vim.keymap.set('n', 'gh', vim.lsp.buf.signature_help, opts)
+            vim.keymap.set('n', 'gd', telescope_builtin.lsp_definitions, opts)
+            vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, opts)
+            vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, opts)
         end,
     },
 })
