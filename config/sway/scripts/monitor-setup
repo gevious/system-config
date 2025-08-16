@@ -2,27 +2,21 @@
 
 
 # model and Serial numbers:
-VECNA_MODEL="DELL P2419H"
 VECNA_LEFT="CPBQFZ2"
 VECNA_RIGHT="9K9QFZ2"
 
-HOME_MODEL="TBD"
-HOME_LEFT="TBD"
-HOME_RIGHT="TBD"
-
-# Home model: TBD
-# Home Left monitor: TBD
-# Home Right monitor: TBD
-
+HOME_LEFT="JM422H3"
+HOME_RIGHT="DT2J9H3"
 
 # Get outputs in the format: "eDP-1: Sharp Corporation", "DP-1: Dell Inc.", etc.
 outputs_json=$(swaymsg -t get_outputs)
 echo "$outputs"
 
 has_external_monitors() {
-    local model=$1
-    if echo "$outputs_json" | jq -e --arg model "$VECNA_MODEL" \
-            '.[] | select(.active == true and .model == $model)'; then
+    local serial=$1
+    echo $serial
+    if echo "$outputs_json" | jq -e --arg serial "$serial" \
+            '.[] | select(.active == true and .serial == $serial)'; then
         return 0 #true
     else
         return 1 #false
@@ -44,14 +38,14 @@ position_monitors() {
     swaymsg workspace "$RIGHT_WS2" output "$right_monitor"
 }
 
-if has_external_monitors $VECNA_MODEL; then
+if has_external_monitors $VECNA_LEFT; then
     echo "Vecna Office monitors detected"
     lm=$(echo "$outputs_json" | jq -r --arg serial "$VECNA_LEFT" \
             '.[] | select(.serial == $serial) | .name')
     rm=$(echo "$outputs_json" | jq -r --arg serial "$VECNA_RIGHT" \
             '.[] | select(.serial == $serial) | .name')
     position_monitors "$lm" "$rm"
-elif has_external_monitors $HOME_MODEL; then
+elif has_external_monitors $HOME_LEFT; then
     echo "Home Office monitors detected"
     lm=$(echo "$outputs_json" | jq -r --arg serial "$HOME_LEFT" \
             '.[] | select(.serial == $serial) | .name')
