@@ -26,6 +26,8 @@ include ./autostart.conf
 
 focus_on_window_activation smart
 
+exec_always --no-startup-id swaybg -i ~/wallpaper.jpg -m fill
+
 # Set up monitors for laptop, home office or vecna office 
 # NOTE: ensure /etc/udev/rules.d/99-sway-monitor-hotplug.rules for automatically reloading sway
 exec_always env \

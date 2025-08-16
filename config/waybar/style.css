@@ -1,0 +1,75 @@
+/* Catppuccin Mocha theme for Waybar */
+
+* {
+  border: none;
+  border-radius: 12px;
+  font-family: "FiraCode Nerd Font", monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-bottom: 2px solid #89b4fa;
+}
+
+#workspaces button {
+  padding: 0 10px;
+  margin: 2px 4px;
+  color: #a6adc8;
+  background: #313244;
+}
+
+#workspaces button.focused {
+  background: #89b4fa;
+  color: #1e1e2e;
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  background: #f38ba8;
+  color: #1e1e2e;
+}
+
+#mode {
+  background: #f38ba8;
+  color: #1e1e2e;
+  padding: 0 10px;
+  border-radius: 8px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
+#pulseaudio,
+#tray {
+  padding: 0 10px;
+  margin: 0 5px;
+  background: #313244;
+  color: #cdd6f4;
+}
+
+#clock {
+  background: #89b4fa;
+  color: #1e1e2e;
+  font-weight: bold;
+}
+
+#battery.warning {
+  background: #fab387;
+  color: #1e1e2e;
+}
+
+#battery.critical {
+  background: #f38ba8;
+  color: #1e1e2e;
+}
+
+#pulseaudio.muted {
+  color: #6c7086;
+}
+
