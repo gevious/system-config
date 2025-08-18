@@ -1,9 +1,7 @@
-/* Catppuccin Mocha theme for Waybar */
-
 * {
   border: none;
   border-radius: 12px;
-  font-family: "FiraCode Nerd Font", monospace;
+  font-family: "UbuntuMono Nerd Font", "Font Awesome 6 Free", "Material Icons";
   font-size: 13px;
   min-height: 0;
 }

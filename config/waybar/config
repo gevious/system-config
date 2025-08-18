@@ -4,11 +4,11 @@
   "height": 32,
   "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "temperature", "battery", "tray"],
+  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
 
 
 "clock": {
-    "format": "  {:%a %b %d  %H:%M}"
+    "format": "🕒 {:%a %b %d  %H:%M}"
   },
   "cpu": {
     "format": " {usage}%"
@@ -21,16 +21,19 @@
     "format": " {temperatureC}°C"
   },
   "battery": {
-    "format": "{capacity}% {icon}",
-    "format-icons": ["", "", "", "", ""]
+    "format-charging": "⚡ {capacity}%🔌",  // Charging icon + plug
+    "format-discharging": "🔋 {capacity}%",  // On battery
+    "format-full": "🔌",         // Fully charged
+    "low_threshold": 20,
+    "critical_threshold": 10
   },
   "network": {
     "format-wifi": "  {essid}",
-    "format-ethernet": "  {ifname}",
+    "format-ethernet": "🖧 {ifname}",
     "format-disconnected": "⚠ Disconnected"
   },
   "pulseaudio": {
     "format": " {volume}%",
-    "format-muted": " muted"
+    "format-muted": "🔇 muted"
   }
 }

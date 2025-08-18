@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# Find the correct keyboard event device by name
-# This is used to bind xremap to an explicit event, and works across reboots and across machines
+# Watch for keyboards, and bind xremap to them
+# Not explicitly binding keyboard. could be done using --device /dev/input/event2
+# but its complex to includ native and external keyboards
 
-DEVICE=$(grep -B5 -A5 -i "AT Translated Set 2 keyboard" /proc/bus/input/devices \
-         | grep -o "event[0-9]*" | head -n1)
-
-# Run xremap on that device
-exec /usr/bin/xremap /home/gevious/.config/xremap/config.yml --watch --device /dev/input/$DEVICE
+exec /usr/bin/xremap /home/gevious/.config/xremap/config.yml --watch
