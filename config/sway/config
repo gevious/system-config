@@ -10,15 +10,15 @@ set $up k
 set $right l
 
 # Workspaces
-set $ws0 "0"
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws8 "8"
-set $ws9 "9"
+set $ws0 0
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws8 8
+set $ws9 9
 
 include ./keybindings.conf
-include ./app-placement.conf
-include ./ui-experience.conf
 include ./autostart.conf
+include ./ui-experience.conf
+include ./app-placement.conf
