@@ -4,10 +4,14 @@ modmap:
     remap:
       CapsLock: Ctrl_L
 keymap:
-  # Remap Alt e/s/d/f to arrow keys
+  # Arrow keys for pok3r keyboard
   - name: Arrow Keys
     remap:
-      Alt-e: up
-      Alt-d: down
-      Alt-s: left
-      Alt-f: right
+      Alt-w: up
+      Alt-s: down
+      Alt-a: left
+      Alt-d: right
+  - name: Tilde
+    remap:
+      Alt-Esc: grave
+      Alt-Shift_R-Esc: shift-grave
