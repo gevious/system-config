@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 12px;
-  font-family: "FiraCode Nerd Font", "Font Awesome 6 Free", "Material Icons";
+  font-family: "FiraCode Nerd Font", "FiraCode Nerd Font Mono", monospace;
   font-size: 14px;
   min-height: 0;
 }
@@ -71,3 +71,8 @@ window#waybar {
   color: #6c7086;
 }
 
+#custom-scratch {
+  color: #a3be8c;
+  font-size: 16px;
+  padding: 0 8px;
+}

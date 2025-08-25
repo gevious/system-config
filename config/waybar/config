@@ -2,13 +2,28 @@
   "layer": "top",
   "position": "bottom", // Waybar position (top|bottom|left|right)
   "height": 32,
-  "modules-left": ["sway/workspaces", "sway/mode"],
-  "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "tray"],
+  "modules-left": ["sway/workspaces", "sway/mode", "custom/scratch"],
+  "modules-center": [],
+  "modules-right": ["tray", "pulseaudio", "network", "cpu", "memory", "battery", "clock"],
 
+  "custom/scratch": {
+    "exec": "~/.config/sway/scripts/scratch-status",
+    "interval": 2,
+    "return-type": "string",
+    "tooltip": "Scratchpad"
+  },
 
-"clock": {
-    "format": "🕒 {:%a %b %d  %H:%M}"
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "format": "{icon}",
+    "format-icons": {
+      "0": "",
+      "9": ""
+    }
+  },
+
+  "clock": {
+    "format": "🕒 {:%a %m/%d  %H:%M}"
   },
   "cpu": {
     "format": " {usage}%"
@@ -23,7 +38,7 @@
   "battery": {
     "format-charging": "⚡ {capacity}%🔌",  // Charging icon + plug
     "format-discharging": "🔋 {capacity}%",  // On battery
-    "format-full": "🔌",         // Fully charged
+    "format-full": "🔌",
     "low_threshold": 20,
     "critical_threshold": 10
   },

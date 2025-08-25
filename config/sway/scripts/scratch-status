@@ -1,0 +1,19 @@
+#!/bin/bash
+
+ICON=""  # Nerd Font terminal icon
+
+# Count all scratchpad windows inside __i3_scratch
+COUNT=$(swaymsg -t get_tree \
+    | jq '[.. 
+           | objects 
+           | select(.name? == "__i3_scratch") 
+           | .floating_nodes? // [] + .nodes? // [] 
+           | .[]? ] 
+          | length')
+
+# Always show icon; append count if >0
+if [[ "$COUNT" -gt 0 ]]; then
+    echo "$ICON ($COUNT)"
+else
+    echo "$ICON"
+fi
