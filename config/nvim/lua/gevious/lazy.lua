@@ -23,6 +23,10 @@ require('lazy').setup({
     -- LSP tools
     'neovim/nvim-lspconfig',
     'simrat39/rust-tools.nvim',
+    {
+      'mfussenegger/nvim-jdtls',
+      ft = { "java" },
+    },
 
     -- LSP Autocompletion
     'hrsh7th/cmp-buffer',
