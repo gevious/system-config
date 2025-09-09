@@ -1,7 +1,5 @@
-vim.g.mapleader = " "
-
 -- Alternative for escape
-vim.keymap.set("i", "<leader>jk", vim.cmd.stopinsert)
+vim.keymap.set("i", "qq", vim.cmd.stopinsert)
 
 -- Open directory editor
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
