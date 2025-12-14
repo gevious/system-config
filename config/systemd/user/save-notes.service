@@ -1,0 +1,6 @@
+[Unit]
+Description=Push notes to github
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/gevious-scripts/push-notes

@@ -22,11 +22,13 @@ require('lazy').setup({
 
     -- LSP tools
     'neovim/nvim-lspconfig',
+    -- Rust LSP
     'simrat39/rust-tools.nvim',
-    {
-      'mfussenegger/nvim-jdtls',
-      ft = { "java" },
-    },
+    -- Java LSP
+--    {
+--      'mfussenegger/nvim-jdtls',
+--      ft = { "java" },
+--    },
 
     -- LSP Autocompletion
     'hrsh7th/cmp-buffer',
@@ -82,22 +84,6 @@ require('lazy').setup({
     -- fuzzy finder
     { 'junegunn/fzf' },
 
-
-    -- Java LSP
-    --    {
-    --      'nvim-java/nvim-java',
-    --      dependencies = {
-    --        'nvim-java/lua-async-await',
-    --        'nvim-java/nvim-java-refactor',
-    --        'nvim-java/nvim-java-core',
-    --        'nvim-java/nvim-java-test',
-    --        'nvim-java/nvim-java-dap',
-    --        'MunifTanjim/nui.nvim',
-    --        'neovim/nvim-lspconfig',
-    --        'mfussenegger/nvim-dap',
-    --      },
-    --    },
-
     -- git worktrees plugin
     { 'ThePrimeagen/git-worktree.nvim' },
 
@@ -114,7 +100,3 @@ require('lazy').setup({
         'habamax/vim-asciidoctor'
     },
 })
-
--- Need this for the Java lsp
--- require('java').setup()
--- require('lspconfig').jdtls.setup({})

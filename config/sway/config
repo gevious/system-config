@@ -25,3 +25,6 @@ include ./keybindings.conf
 include ./autostart.conf
 include ./ui-experience.conf
 include ./app-placement.conf
+
+# Start mako so we can send notifications with send-notify
+exec_always --no-startup-id mako & 
