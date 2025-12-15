@@ -35,14 +35,15 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1 || notify_exit "$NOTES_DIR i
 # Exit if no changes
 if git diff --quiet && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
     # No changes and no untracked files
-  notify_exit "No changes to commit"
+  echo "No changes to commit"
+  exit 0
 fi
 
 git add -A
 git commit -m "Auto commit $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
 git pull
 if git push; then
-    exit 0
+  echo "Saved notes"
 else
     notify "Failed to push notes"
 fi
