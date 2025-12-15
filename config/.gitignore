@@ -1,3 +1,6 @@
+1Password
+Android Open Source Project
+Kingsoft
 BraveSoftware
 CCP
 GIMP
@@ -10,6 +13,7 @@ Slack
 Thunar
 VirtualBox
 
+.android
 autostart
 cef_user_data
 configstore
@@ -21,6 +25,9 @@ glib-2.0
 gnome-initial-setup-done
 goa-1.0
 google-chrome
+google-chrome-beta
+google-chrome-unstable
+chromium
 gthumb
 gtk-2.0
 gtk-3.0
@@ -31,6 +38,7 @@ libreoffice
 lutris
 menus
 mimeapps.list
+microsoft-edge-dev
 nautilus
 nextjs-nodejs
 nvm
@@ -43,9 +51,12 @@ sensu
 spotify
 teams
 user-dirs*
+vivaldi-snapshot
+vivaldi
 xed
 xfce4
 yarn
 yay
 zoom.conf
+zoomus.conf
 zsh/.histfile
