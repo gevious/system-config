@@ -39,6 +39,7 @@ vim.opt.colorcolumn = "80"
 vim.api.nvim_set_hl(0, 'LineNr', { fg = '#5fafff' })
 
 -- Folding
+vim.opt.foldenable = false -- keep everything open by default
 vim.opt.foldmethod = "indent"
 
 -- Treesitter folding 

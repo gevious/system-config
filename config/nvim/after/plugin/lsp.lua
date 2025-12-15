@@ -36,10 +36,16 @@ local telescope = require("telescope.builtin")
 
 -- Keymaps
 local opts = { buffer = bufnr, noremap = true, silent = true }
+vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+vim.keymap.set("n", "gR", vim.lsp.buf.rename, opts)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- default
+
+
+vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
+  desc = "LSP references)",
+})
 
 -- Show diagnostics for project
 vim.keymap.set('n', '<leader>xx', function()
