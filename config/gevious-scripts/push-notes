@@ -29,7 +29,6 @@ if [ ! -d "$NOTES_DIR" ]; then
   notify_exit "notes directory doesn't exist: $NOTES_DIR"
 fi
 
-
 # Exit if not a git repo
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || notify_exit "$NOTES_DIR is not a git repo"
 
@@ -43,8 +42,7 @@ git add -A
 git commit -m "Auto commit $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
 git pull
 if git push; then
-    notify "Pushed notes"
+    exit 0
 else
     notify "Failed to push notes"
 fi
-

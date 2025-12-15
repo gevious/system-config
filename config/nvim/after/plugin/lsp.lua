@@ -34,6 +34,13 @@ vim.diagnostic.config({
 -- Show all diagnostics in telescope
 local telescope = require("telescope.builtin")
 
+-- Keymaps
+local opts = { buffer = bufnr, noremap = true, silent = true }
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
 -- Show diagnostics for project
 vim.keymap.set('n', '<leader>xx', function()
     telescope.diagnostics()
@@ -43,7 +50,6 @@ end, { desc = "List all diagnostics in Telescope" })
 vim.keymap.set('n', '<leader>xl', function()
     telescope.diagnostics({ bufnr = 0 })
 end, { desc = "List buffer diagnostics in Telescope" })
-
 
 -- open dialog only when asked
 vim.keymap.set('n', '<leader>e', function()

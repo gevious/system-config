@@ -16,19 +16,45 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
+    -- Pencil for writing
+    {
+        'preservim/vim-pencil',
+        event = "BufReadPre", -- optional, load only when opening a buffer
+        config = function()
+            -- Optional settings
+            vim.g["pencil#wrapMode"] = "soft" -- soft wrap
+            vim.g["pencil#textwidth"] = 80
+        end
+    },
+
     --
     -- LSP SETUP
     -- Assumes existance of LSP clients like rust-analyzer
 
     -- LSP tools
+    {
     'neovim/nvim-lspconfig',
+    lazy = true,
+    -- ft = { "typescript", "rust", "java"},
+    ft = { "typescript", "rust"},
+    config = function()
+        vim.lsp.start({ name = "rust-analyzer" })
+        vim.lsp.start({ name = "tsserver" })
+        vim.lsp.start({ name = "jdtls" })
+        vim.lsp.start({ name = "zls" })
+    end,
+    },
     -- Rust LSP
-    'simrat39/rust-tools.nvim',
+    {
+        'mrcjkb/rustaceanvim',
+        version = '^6', -- Recommended
+        lazy = false, -- This plugin is already lazy
+    },
     -- Java LSP
---    {
---      'mfussenegger/nvim-jdtls',
---      ft = { "java" },
---    },
+    {
+      'mfussenegger/nvim-jdtls',
+      ft = { "java" },
+    },
 
     -- LSP Autocompletion
     'hrsh7th/cmp-buffer',
