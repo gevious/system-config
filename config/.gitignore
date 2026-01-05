@@ -49,6 +49,8 @@ pulse
 rclone
 sensu
 spotify
+systemd/user/sockets.target.wants
+systemd/user/timers.target.wants
 teams
 user-dirs*
 vivaldi-snapshot

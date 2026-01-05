@@ -110,4 +110,4 @@ SAVEHIST=1000
 bindkey -e
 
 # Cargo installables
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/zig/lang:$HOME/zig/zls:$HOME/.cargo/bin:$PATH"
