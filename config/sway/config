@@ -21,17 +21,7 @@ set $ws7 7
 set $ws8 8
 set $ws9 9
 
-# Needed for pure wayland (at least on ubuntu)
-set $WAYLAND_DISPLAY wayland-1
-set $XDG_CURRENT_DESKTOP sway
-exec_always {
-    export XDG_CURRENT_DESKTOP=sway
-}
-
 include ./keybindings.conf
 include ./autostart.conf
 include ./ui-experience.conf
 include ./app-placement.conf
-
-# Start mako so we can send notifications with send-notify
-exec_always --no-startup-id mako & 

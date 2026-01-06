@@ -35,7 +35,8 @@ position_monitors() {
     swaymsg workspace "$RIGHT_WS2" output "$right_monitor"
 
     # Mirror right monitor on laptop monitor
-    swaymsg output eDP-1 position 1920 0 enable
+    #swaymsg output eDP-1 position 1920 0 enable
+    swaymsg output eDP-1 disable
 }
 
 if has_external_monitors $VECNA_LEFT; then
