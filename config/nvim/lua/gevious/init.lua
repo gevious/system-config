@@ -1,7 +1,5 @@
--- Make <Space> the leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-require("gevious.lazy")
-require("gevious.set")
-require("gevious.remap")
+require("gevious.autocommands")
+require("gevious.colorscheme")
+require("gevious.keymap")
+require("gevious.options")
+require("gevious.plugins")
