@@ -5,7 +5,7 @@
 # all DIRECTORIES show up along with 1 additional child directory
 
 BASE_DIR="${HOME}/w"
-CATEGORIES="groundskeeper vecna"
+CATEGORIES="groundskeeper"
 
 entries=$(
   for dir in "$BASE_DIR"/*; do
