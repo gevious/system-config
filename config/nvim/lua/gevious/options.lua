@@ -23,8 +23,8 @@ local options = {
   hlsearch = true,           -- highlight text for last search
   wrap = false,              -- do not wrap text
   spell = false,             -- do not spell check
-  scrolloff = 8,             -- min lines to show for vertical scrolling
-  sidescrolloff = 8,         -- min lines to show for horizontal scrolling
+  scrolloff = 3,             -- min lines to show for vertical scrolling
+  sidescrolloff = 3,         -- min lines to show for horizontal scrolling
 
   updatetime = 50,           -- completion time (4000ms default)
   timeoutlen = 300,          -- time to wait for mapped sequence to complete
