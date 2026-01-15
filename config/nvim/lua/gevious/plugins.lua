@@ -91,22 +91,13 @@ require('lazy').setup({
 
     -- LSP Things
     {
-    'neovim/nvim-lspconfig',
-    lazy = true,
-    -- ft = { "typescript", "rust", "java"},
-    ft = { "typescript", "rust", "zig"},
-    config = function()
-        vim.lsp.start({ name = "rust-analyzer" })
-        vim.lsp.start({ name = "tsserver" })
-        vim.lsp.start({ name = "jdtls" })
-        vim.lsp.start({ name = "zls" })
-    end,
+        'neovim/nvim-lspconfig',
+        lazy = true,
     },
     -- Rust LSP
     {
         'mrcjkb/rustaceanvim',
         version = '^6', -- Recommended
-        lazy = false, -- This plugin is already lazy
     },
     -- Java LSP
     {
