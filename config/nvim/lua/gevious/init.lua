@@ -1,5 +1,0 @@
-require("gevious.autocommands")
-require("gevious.colorscheme")
-require("gevious.keymap")
-require("gevious.options")
-require("gevious.plugins")
