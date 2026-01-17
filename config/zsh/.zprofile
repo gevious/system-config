@@ -1,7 +1,7 @@
 EDITOR=nvim
 alias ed=$EDITOR
 alias nv=$EDITOR
-alias vi=nvim
+alias v=nvim
 
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
