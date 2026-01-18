@@ -111,3 +111,26 @@ bindkey -e
 
 # Cargo installables
 export PATH="$HOME/zig/lang:$HOME/zig/zls:$HOME/.cargo/bin:$PATH"
+
+# Claude terminal integration, when using ??
+preexec() {
+  if [[ "$1" == '??'* ]]; then
+    # strip leading ??
+    local query="${1#?? }"
+
+    # read any extra lines until empty line
+    while true; do
+      IFS= read -r line || break
+      [[ -z "$line" ]] && break
+      query+=$'\n'"$line"
+    done
+
+    echo "🤖 Asking Claude:"
+    echo "$query"
+    echo "----------------------------------------"
+
+    aichat --model claude "$query"
+
+    kill -INT $$ # prevent shell from trying to run lines as commands
+  fi
+}
